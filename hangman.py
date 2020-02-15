@@ -1,27 +1,30 @@
 
 import random
 
-word_file_name = "words.txt"
+#word_file_name = "words.txt"
+#
+#
+#def loadWords():
+##    print("Loading Word List From File.")
+#    
+#    in_file = open(word_file_name)
+#    line = in_file.readline()
+#    word_list = line.split()
+#    
+#    print(" ", len(word_list), "Words Loaded.")
+##    print(word_list)
+#    
+#    return word_list
+line = ['rainbow', 'computer', 'science', 'programming',  
+         'python', 'mathematics', 'player', 'condition',  
+         'reverse', 'water', 'board', 'imam'] 
+loadWords = random.choice(line)
+
+#def chooseWord(word_list):   
+#    return random.choice(word_list)
 
 
-def loadWords():
-#    print("Loading Word List From File.")
-    
-    in_file = open(word_file_name)
-    line = in_file.readline()
-    word_list = line.split()
-    
-    print(" ", len(word_list), "Words Loaded.")
-#    print(word_list)
-    
-    return word_list
-
-
-def chooseWord(word_list):   
-    return random.choice(word_list)
-
-
-word_list = loadWords()
+#word_list = loadWords()
 
 
 def word_Guess(secretWord, letterGuess):
@@ -91,8 +94,6 @@ def hangman(secretWord):
         print("----------")
         print("Sorry, You ran out. The word was \'" + secretWord + "\'.")
         
-secretWord = "location"
+secretWord = loadWords
 hangman(secretWord)
-            
-    
-    
+     

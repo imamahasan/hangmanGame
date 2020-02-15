@@ -1,28 +1,18 @@
 
 import random
 
-line = ['rainbow', 'computer', 'science', 'programming',  
+admin_valu = ['rainbow', 'computer', 'science', 'programming',  
          'python', 'mathematics', 'player', 'condition',  
          'reverse', 'water', 'board', 'imam', 'samiul', 
          'noor', 'google', 'daffodil', 'dhaka', 'ahasan'] 
-loadWords = random.choice(line)
+random_word = random.choice(admin_valu)
+   
 
-def wordGuessed(secretWord, lettersGuessed):
-    count=0
-    for letters in secretWord:
-        if letters in lettersGuessed:
-            count+=1
-    if count==len(secretWord):
-        return True
-    else:
-        return False
-    
-
-def getWord_Guess(secretWord, letterGuess):
+def guess_word(dynamicGuess, userGuess):
     string = ""
     
-    for key in secretWord:
-        if key in letterGuess:
+    for key in dynamicGuess:
+        if key in userGuess:
             string += key
             
         else:
@@ -31,13 +21,13 @@ def getWord_Guess(secretWord, letterGuess):
     return string
 
 
-def getAvailabeleLetters(letterGuess):
+def letters(userGuess):
     string = ""
     count = 0
     s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     
     for letter in s:
-        if letter in letterGuess:
+        if letter in userGuess:
             count += 1
             
         else:
@@ -46,43 +36,44 @@ def getAvailabeleLetters(letterGuess):
     return string
 
 
-def hangman(secretWord):
-    length = len(secretWord)
+def hangman(dynamicGuess):
+    length = len(dynamicGuess)
     
     print("I'm thinking", length, "letter long word.")
-    chances = 2 * len(secretWord)
+    chances = 7
     
-    letterGuess = []
+    userGuess = []
     
     while (chances != 0):
         
-        if secretWord != getWord_Guess(secretWord, letterGuess):
-            print("\n\tYou have", chances, "guesses left")
+        if dynamicGuess != guess_word(dynamicGuess, userGuess):
+            print("\n\tYou have", chances, "chances")
             
-            guess = input("Please guess a letter: ")
-            guessLowerCase = guess.lower()
+            u_input = input("Please guess a letter: ")
+            lowerCase = u_input.lower()
             
-            if guessLowerCase in letterGuess:
-                print("You Have already guessed that letter: ", getWord_Guess(secretWord, letterGuess))
+            if lowerCase in userGuess:
+                print("Already guessed: ", guess_word(dynamicGuess, userGuess))
                 
-            elif guessLowerCase not in secretWord:
-                print("That letter is not in my word: ", getWord_Guess(secretWord, letterGuess))
+            elif lowerCase not in dynamicGuess:
+                print("Letter is not in word: ", guess_word(dynamicGuess, userGuess))
                 chances -= 1
                 
             else:
-                letterGuess.append(guessLowerCase)
-                print("Good Guess: ", getWord_Guess(secretWord, letterGuess))
+                userGuess.append(lowerCase)
+                print("Good Guess: ", guess_word(dynamicGuess, userGuess))
                 
-            letterGuess.append(guessLowerCase)
+            userGuess.append(lowerCase)
             
-        elif secretWord == getWord_Guess(secretWord, letterGuess):
+        elif dynamicGuess == guess_word(dynamicGuess, userGuess):
             print("Congratulations, You Win!")
             break
         
     else:
-        print("Sorry, You ran out. The word was \'" + secretWord + "\'.")
+        print("Sorry, You ran out. The word was \'" + dynamicGuess + "\'.")
         
-secretWord = loadWords
-hangman(secretWord)
+dynamicGuess = random_word
+hangman(dynamicGuess)
             
     
+  

@@ -41,10 +41,21 @@ def hangman(dynamicGuess):
     
     print("I'm thinking", length, "letter long word.")
     chances = 7
+    valu = 0
     
     userGuess = []
     
     while (chances != 0):
+        print("     ----------")
+        print("     |        |")
+        print("     |        " + ("O" if valu > 0 else ""))
+        print("     |        " + ("/\\" if valu > 1 else ""))
+        print("     |       " + ("/  \\" if valu > 2 else ""))
+        print("     |        " + ("||" if valu > 3 else ""))      
+        print("     |        " + ("/\\" if valu > 4 else ""))
+        print("     |       " + ("/  \\" if valu > 5 else ""))
+#        print("     |        " + ("->>" if valu > 6 else ""))
+        print(" ----------")
         
         if dynamicGuess != guess_word(dynamicGuess, userGuess):
             print("\n\tYou have", chances, "chances")
@@ -58,6 +69,7 @@ def hangman(dynamicGuess):
             elif lowerCase not in dynamicGuess:
                 print("Letter is not in word: ", guess_word(dynamicGuess, userGuess))
                 chances -= 1
+                valu += 1
                 
             else:
                 userGuess.append(lowerCase)
@@ -74,6 +86,3 @@ def hangman(dynamicGuess):
         
 dynamicGuess = random_word
 hangman(dynamicGuess)
-            
-    
-  
